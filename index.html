@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 2 - Website Building</title>
+        <style>
+            body {
+                box-sizing: border-box;
+                font-family: sans-serif;
+            }
+
+            #login-container {
+                width: 460px;
+                margin: 0 auto;
+            }
+
+            form label,
+            form input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            form input {
+                padding: 8px;
+            }
+
+            form label {
+                font-weight: bold;
+            }
+
+            form div {
+                margin: 16px 0px;
+            }
+        </style>
+        <script src="https://kit.fontawesome.com/57a575968d.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+
+        <div id="login-container">
+
+            <form>
+                <div>
+                    <label for="username">Username:</label>
+                    <input id="username" type="text">
+                </div>
+
+                <div>
+                    <label for="password">Password:</label>
+                    <input id="password" type="password">
+                </div>
+
+                <input type="submit" value="Login">
+            </form>
+
+            <p id="usernameError"></p>
+            <p id="passwordError"></p>
+            
+
+        </div>
+
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script>
+
+            var loginContainer = document.getElementById("login-container");
+
+            loginContainer.addEventListener("submit", function(e){
+                e.preventDefault();
+
+                console.log("Username: " + username.value + "\n" + "Password: " + password.value);
+                validate();
+            });
+
+
+            function validate(){
+                var usernameError = document.getElementById("usernameError");
+                var passwordError = document.getElementById("passwordError");
+                var username = document.getElementById("username");
+                var password = document.getElementById("password");
+
+                removeIcon();
+
+                switch(username.value) {
+                    case "":
+                        console.log("gol");
+                        usernameError.innerHTML = "Please, enter a username";
+                        username.style.borderColor = "red";
+                        username.insertAdjacentHTML("afterend", '<i id="xmark" class="fa-solid fa-xmark" style="color: Red;"></i>');
+                        break;
+                    case "new_user":
+                        console.log("ok");
+                        usernameError.innerHTML = "";
+                        username.style.borderColor = "green";
+                        username.insertAdjacentHTML("afterend", '<i id="check" class="fa-solid fa-check" style="color: Green;"></i>');
+                        break;
+                    default:
+                        console.log("invalid");
+                        usernameError.innerHTML = "Please, enter a valid username";
+                        username.style.borderColor = "red";
+                        username.insertAdjacentHTML("afterend", '<i id="xmark" class="fa-solid fa-xmark" style="color: Red;"></i>');
+                }
+
+                switch(password.value) {
+                    case "":
+                        console.log("gol");
+                        passwordError.innerHTML = "Please, enter a password";
+                        password.style.borderColor = "red";
+                        password.insertAdjacentHTML("afterend", '<i id="pxmark" class="fa-solid fa-xmark" style="color: Red;"></i>');
+                        break;
+                    case "123456789":
+                        console.log("ok");
+                        passwordError.innerHTML = "";
+                        password.style.borderColor = "green";
+                        password.insertAdjacentHTML("afterend", '<i id="pcheck" class="fa-solid fa-check" style="color: Green;"></i>');
+                        break;
+                    default:
+                        console.log("invalid");
+                        passwordError.innerHTML = "Please, enter a valid password";
+                        password.style.borderColor = "red";
+                        password.insertAdjacentHTML("afterend", '<i id="pxmark" class="fa-solid fa-xmark" style="color: Red;"></i>');
+                }
+
+            }
+
+            function removeIcon(){
+                var check = document.getElementById("check");
+                if (check){
+                    check.parentNode.removeChild(check);
+                }
+
+                var xmark = document.getElementById("xmark");
+                if (xmark){
+                    xmark.parentNode.removeChild(xmark);
+                }
+
+                var pcheck = document.getElementById("pcheck");
+                if (pcheck){
+                    pcheck.parentNode.removeChild(pcheck);
+                }
+
+                var pxmark = document.getElementById("pxmark");
+                if (pxmark){
+                    pxmark.parentNode.removeChild(pxmark);
+                }
+            }
+
+        </script>
+    </body>
+</html>
